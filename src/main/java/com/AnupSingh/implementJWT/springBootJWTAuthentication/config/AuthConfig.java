@@ -1,0 +1,36 @@
+package com.anup.implementJWT.springBootJWTAuthentication.config;
+
+import com.anup.implementJWT.springBootJWTAuthentication.exp.AuthError;
+
+/**
+ * Created by Anup Kumar Singh - 2025
+ */
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+@Configuration
+public class AuthConfig {
+//        @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails user1 = User.builder().username("anup").password(passwordEncoder().encode("14640548")).build();
+//        UserDetails user2 = User.builder().username("singh").password(passwordEncoder().encode("14640548")).build();
+//        return new InMemoryUserDetailsManager(user1,user2);
+//    }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
+        return builder.getAuthenticationManager();
+    }
+    @Bean
+    public AuthError authError() {
+        return new AuthError();
+    }
+
+}
